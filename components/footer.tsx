@@ -1,12 +1,11 @@
 "use client"
 
-import { Github, Linkedin, ArrowUpRight } from "lucide-react"
+import { Github, Linkedin, Mail } from "lucide-react"
 
 const links = [
-  { icon: Github, href: "https://github.com/muhammadismaeel", label: "GitHub" },
-  { icon: Linkedin, href: "https://linkedin.com/in/muhammadismaeel", label: "LinkedIn" },
-  { icon: ArrowUpRight, href: "https://fiverr.com/muhammadismaeel", label: "Fiverr" },
-  { icon: ArrowUpRight, href: "https://upwork.com/freelancers/muhammadismaeel", label: "Upwork" },
+  { icon: Github, href: "https://github.com/ismaeeldev", label: "GitHub" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/ismaeeldev786/", label: "LinkedIn" },
+  { icon: Mail, href: "mailto:m.ismaeel.developer@gmail.com", label: "Email" },
 ]
 
 export function Footer() {

@@ -239,10 +239,15 @@
   z-index: 9999;
 }
 
-/* ---- Custom cursor on buttons ---- */
+/* ---- Custom cursor ---- */
+
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}
 
 .cursor-glow {
-  cursor: none;
   position: relative;
 }
 

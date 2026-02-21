@@ -8,51 +8,52 @@ const categories = [
   {
     title: "Frontend",
     skills: [
-      { name: "React.js", level: "Expert" },
-      { name: "Next.js", level: "Expert" },
-      { name: "TypeScript", level: "Expert" },
-      { name: "Tailwind CSS", level: "Expert" },
+      { name: "React.js", level: "Advanced" },
+      { name: "Next.js", level: "Advanced" },
+      { name: "TypeScript", level: "Intermediate" },
+      { name: "Tailwind CSS", level: "Advanced" },
       { name: "HTML/CSS", level: "Expert" },
     ],
   },
   {
     title: "Backend",
     skills: [
-      { name: "Node.js", level: "Expert" },
-      { name: "Nest.js", level: "Advanced" },
-      { name: "Express.js", level: "Expert" },
-      { name: "tRPC", level: "Advanced" },
-      { name: "GraphQL", level: "Advanced" },
+      { name: "Node.js", level: "Advanced" },
+      { name: "Nest.js", level: "Intermediate" },
+      { name: "Express.js", level: "Advanced" },
+      { name: "tRPC", level: "Intermediate" },
+      { name: "GraphQL", level: "Intermediate" },
     ],
   },
   {
     title: "AI / ML",
     skills: [
-      { name: "LangChain", level: "Advanced" },
-      { name: "LangGraph", level: "Advanced" },
-      { name: "Hugging Face", level: "Advanced" },
-      { name: "OpenAI API", level: "Expert" },
-      { name: "RAG Systems", level: "Advanced" },
+      { name: "LangChain", level: "Intermediate" },
+      { name: "LangGraph", level: "Intermediate" },
+      { name: "Hugging Face", level: "Beginner" },
+      { name: "OpenAI API", level: "Advanced" },
+      { name: "RAG Systems", level: "Intermediate" },
     ],
   },
   {
     title: "Database & Tools",
     skills: [
-      { name: "MongoDB", level: "Expert" },
-      { name: "PostgreSQL", level: "Advanced" },
-      { name: "Redis", level: "Intermediate" },
-      { name: "Docker", level: "Advanced" },
-      { name: "Git/GitHub", level: "Expert" },
+      { name: "MongoDB", level: "Advanced" },
+      { name: "PostgreSQL", level: "Intermediate" },
+      { name: "Redis", level: "Beginner" },
+      { name: "Docker", level: "Intermediate" },
+      { name: "Git/GitHub", level: "Advanced" },
     ],
   },
 ]
 
 function getLevelWidth(level: string) {
   switch (level) {
-    case "Expert": return "100%"
-    case "Advanced": return "80%"
-    case "Intermediate": return "60%"
-    default: return "50%"
+    case "Expert": return "95%"
+    case "Advanced": return "75%"
+    case "Intermediate": return "55%"
+    case "Beginner": return "35%"
+    default: return "40%"
   }
 }
 
@@ -61,6 +62,7 @@ function getLevelColor(level: string) {
     case "Expert": return "#00E5FF"
     case "Advanced": return "#00B4D8"
     case "Intermediate": return "#0096C7"
+    case "Beginner": return "#0077B6"
     default: return "#0077B6"
   }
 }

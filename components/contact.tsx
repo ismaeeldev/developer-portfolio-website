@@ -3,14 +3,14 @@
 import { useRef, useState } from "react"
 import { motion, useInView } from "framer-motion"
 import { SectionWrapper } from "./section-wrapper"
-import { Send, Github, Linkedin, Mail, MapPin, ArrowUpRight } from "lucide-react"
+import { Send, Github, Linkedin, Mail, MapPin, CheckCircle, AlertCircle, Loader2 } from "lucide-react"
 
 const contactInfo = [
   {
     icon: Mail,
     label: "Email",
-    value: "muhammadismaeel.dev@gmail.com",
-    href: "mailto:muhammadismaeel.dev@gmail.com",
+    value: "m.ismaeel.developer@gmail.com",
+    href: "mailto:m.ismaeel.developer@gmail.com",
   },
   {
     icon: MapPin,
@@ -24,26 +24,14 @@ const platforms = [
   {
     name: "GitHub",
     icon: Github,
-    href: "https://github.com/muhammadismaeel",
+    href: "https://github.com/ismaeeldev",
     color: "#E2E8F0",
   },
   {
     name: "LinkedIn",
     icon: Linkedin,
-    href: "https://linkedin.com/in/muhammadismaeel",
+    href: "https://www.linkedin.com/in/ismaeeldev786/",
     color: "#0A66C2",
-  },
-  {
-    name: "Fiverr",
-    icon: ArrowUpRight,
-    href: "https://fiverr.com/muhammadismaeel",
-    color: "#1DBF73",
-  },
-  {
-    name: "Upwork",
-    icon: ArrowUpRight,
-    href: "https://upwork.com/freelancers/muhammadismaeel",
-    color: "#14A800",
   },
 ]
 
@@ -52,9 +40,32 @@ export function Contact() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
   const [focused, setFocused] = useState<string | null>(null)
   const [formValues, setFormValues] = useState({ name: "", email: "", message: "" })
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
 
   const handleChange = (field: string, value: string) => {
     setFormValues((prev) => ({ ...prev, [field]: value }))
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!formValues.name || !formValues.email || !formValues.message) return
+
+    setStatus("loading")
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formValues),
+      })
+      if (res.ok) {
+        setStatus("success")
+        setFormValues({ name: "", email: "", message: "" })
+      } else {
+        setStatus("error")
+      }
+    } catch {
+      setStatus("error")
+    }
   }
 
   return (
@@ -76,7 +87,7 @@ export function Contact() {
             <div className="mb-8 flex flex-col gap-4">
               {contactInfo.map((item) => (
                 <div key={item.label} className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#00E5FF]/8">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#00E5FF]/8">
                     <item.icon className="h-4 w-4 text-primary" />
                   </div>
                   <div>
@@ -126,7 +137,7 @@ export function Contact() {
           >
             <div className="glass glow-border rounded-2xl p-6 lg:p-8">
               <form
-                onSubmit={(e) => e.preventDefault()}
+                onSubmit={handleSubmit}
                 className="flex flex-col gap-5"
               >
                 {(["name", "email", "message"] as const).map((field) => {
@@ -175,13 +186,45 @@ export function Contact() {
 
                 <motion.button
                   type="submit"
-                  className="btn-neon flex items-center justify-center gap-2 rounded-xl px-8 py-3.5 text-sm"
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
+                  disabled={status === "loading"}
+                  className="btn-neon flex items-center justify-center gap-2 rounded-xl px-8 py-3.5 text-sm disabled:opacity-60"
+                  whileHover={{ scale: status === "loading" ? 1 : 1.03 }}
+                  whileTap={{ scale: status === "loading" ? 1 : 0.97 }}
                 >
-                  <Send className="h-4 w-4" />
-                  {"Send Message"}
+                  {status === "loading" ? (
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      {"Sending..."}
+                    </>
+                  ) : (
+                    <>
+                      <Send className="h-4 w-4" />
+                      {"Send Message"}
+                    </>
+                  )}
                 </motion.button>
+
+                {status === "success" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="flex items-center gap-2 rounded-lg bg-emerald-500/10 px-4 py-3 text-sm text-emerald-400"
+                  >
+                    <CheckCircle className="h-4 w-4" />
+                    {"Message sent successfully! I'll get back to you soon."}
+                  </motion.div>
+                )}
+
+                {status === "error" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="flex items-center gap-2 rounded-lg bg-red-500/10 px-4 py-3 text-sm text-red-400"
+                  >
+                    <AlertCircle className="h-4 w-4" />
+                    {"Something went wrong. Please email me directly."}
+                  </motion.div>
+                )}
               </form>
             </div>
           </motion.div>
