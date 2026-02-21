@@ -64,7 +64,8 @@ export function Navbar() {
           }}
         >
           <Terminal className="h-5 w-5 text-primary" />
-          <span className="text-gradient">{"Muhammad"}</span>
+          <span className="text-gradient">{"MI"}</span>
+          <span className="text-foreground/30">{"."}</span>
         </motion.a>
 
         <div className="hidden items-center gap-1 md:flex">

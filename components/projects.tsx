@@ -189,7 +189,7 @@ export function Projects() {
           transition={{ delay: 0.8 }}
         >
           <motion.a
-            href="https://github.com/ismaeeldev"
+            href="https://github.com/muhammadismaeel"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-ghost flex items-center gap-2 rounded-xl px-6 py-3 text-sm"

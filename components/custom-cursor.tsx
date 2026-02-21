@@ -1,13 +1,12 @@
 "use client"
 
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState, useCallback } from "react"
 import { motion, useSpring, useMotionValue } from "framer-motion"
 
 export function CustomCursor() {
   const [isHovering, setIsHovering] = useState(false)
   const [isClicking, setIsClicking] = useState(false)
   const [visible, setVisible] = useState(false)
-  const isTouchDevice = useRef(false)
 
   const cursorX = useMotionValue(-100)
   const cursorY = useMotionValue(-100)
@@ -16,64 +15,61 @@ export function CustomCursor() {
   const cursorXSpring = useSpring(cursorX, springConfig)
   const cursorYSpring = useSpring(cursorY, springConfig)
 
-  useEffect(() => {
-    // Detect touch device
-    if (typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches) {
-      isTouchDevice.current = true
-      return
-    }
-
-    const onMouseMove = (e: MouseEvent) => {
+  const onMouseMove = useCallback(
+    (e: MouseEvent) => {
       cursorX.set(e.clientX)
       cursorY.set(e.clientY)
       if (!visible) setVisible(true)
-    }
+    },
+    [cursorX, cursorY, visible]
+  )
 
-    const onMouseDown = () => setIsClicking(true)
-    const onMouseUp = () => setIsClicking(false)
-
-    window.addEventListener("mousemove", onMouseMove, { passive: true })
-    window.addEventListener("mousedown", onMouseDown)
-    window.addEventListener("mouseup", onMouseUp)
+  useEffect(() => {
+    window.addEventListener("mousemove", onMouseMove)
+    window.addEventListener("mousedown", () => setIsClicking(true))
+    window.addEventListener("mouseup", () => setIsClicking(false))
 
     const handleHoverStart = () => setIsHovering(true)
     const handleHoverEnd = () => setIsHovering(false)
 
-    const bindInteractiveElements = () => {
-      const elements = document.querySelectorAll(
-        'a, button, [role="button"], input, textarea, select, .cursor-glow'
-      )
-      elements.forEach((el) => {
-        el.removeEventListener("mouseenter", handleHoverStart)
-        el.removeEventListener("mouseleave", handleHoverEnd)
-        el.addEventListener("mouseenter", handleHoverStart)
-        el.addEventListener("mouseleave", handleHoverEnd)
-      })
-    }
+    const interactiveElements = document.querySelectorAll(
+      'a, button, [role="button"], input, textarea, .cursor-glow'
+    )
 
-    bindInteractiveElements()
-
-    const observer = new MutationObserver(() => {
-      bindInteractiveElements()
+    interactiveElements.forEach((el) => {
+      el.addEventListener("mouseenter", handleHoverStart)
+      el.addEventListener("mouseleave", handleHoverEnd)
     })
-    observer.observe(document.body, { childList: true, subtree: true })
 
     return () => {
       window.removeEventListener("mousemove", onMouseMove)
-      window.removeEventListener("mousedown", onMouseDown)
-      window.removeEventListener("mouseup", onMouseUp)
-      observer.disconnect()
-      const elements = document.querySelectorAll(
-        'a, button, [role="button"], input, textarea, select, .cursor-glow'
-      )
-      elements.forEach((el) => {
+      interactiveElements.forEach((el) => {
         el.removeEventListener("mouseenter", handleHoverStart)
         el.removeEventListener("mouseleave", handleHoverEnd)
       })
     }
-  }, [cursorX, cursorY, visible])
+  }, [onMouseMove])
 
-  if (isTouchDevice.current) return null
+  // Re-bind on DOM changes
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      const handleHoverStart = () => setIsHovering(true)
+      const handleHoverEnd = () => setIsHovering(false)
+      const interactiveElements = document.querySelectorAll(
+        'a, button, [role="button"], input, textarea, .cursor-glow'
+      )
+      interactiveElements.forEach((el) => {
+        el.addEventListener("mouseenter", handleHoverStart)
+        el.addEventListener("mouseleave", handleHoverEnd)
+      })
+    })
+    observer.observe(document.body, { childList: true, subtree: true })
+    return () => observer.disconnect()
+  }, [])
+
+  if (typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches) {
+    return null
+  }
 
   return (
     <>
@@ -86,7 +82,6 @@ export function CustomCursor() {
           translateX: "-50%",
           translateY: "-50%",
         }}
-        aria-hidden="true"
       >
         <motion.div
           animate={{
@@ -115,7 +110,6 @@ export function CustomCursor() {
           translateX: "-50%",
           translateY: "-50%",
         }}
-        aria-hidden="true"
       >
         <motion.div
           animate={{

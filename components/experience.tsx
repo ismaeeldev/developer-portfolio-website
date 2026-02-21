@@ -80,13 +80,14 @@ export function Experience() {
           {/* Timeline line */}
           <div className="absolute left-4 top-0 h-full w-px md:left-1/2 md:-translate-x-px">
             <motion.div
-              className="h-full w-full origin-top"
+              className="h-full w-full"
               style={{
                 background: "linear-gradient(180deg, #00E5FF, #00B4D8, transparent)",
               }}
               initial={{ scaleY: 0 }}
               animate={isInView ? { scaleY: 1 } : {}}
               transition={{ duration: 1, delay: 0.3 }}
+              style-origin="top"
             />
           </div>
 

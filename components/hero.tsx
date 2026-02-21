@@ -166,8 +166,8 @@ export function Hero() {
           transition={{ delay: 0.8 }}
         >
           {[
-            { icon: Github, href: "https://github.com/ismaeeldev", label: "GitHub" },
-            { icon: Linkedin, href: "https://www.linkedin.com/in/ismaeeldev786/", label: "LinkedIn" },
+            { icon: Github, href: "https://github.com/muhammadismaeel", label: "GitHub" },
+            { icon: Linkedin, href: "https://linkedin.com/in/muhammadismaeel", label: "LinkedIn" },
           ].map((social) => (
             <motion.a
               key={social.label}
