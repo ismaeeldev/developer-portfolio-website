@@ -1,31 +1,39 @@
 "use client"
 
-import { Github, Linkedin, Twitter } from "lucide-react"
+import { Github, Linkedin, ArrowUpRight } from "lucide-react"
 
-const socials = [
-  { icon: Github, href: "https://github.com", label: "GitHub" },
-  { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
-  { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
+const links = [
+  { icon: Github, href: "https://github.com/muhammadismaeel", label: "GitHub" },
+  { icon: Linkedin, href: "https://linkedin.com/in/muhammadismaeel", label: "LinkedIn" },
+  { icon: ArrowUpRight, href: "https://fiverr.com/muhammadismaeel", label: "Fiverr" },
+  { icon: ArrowUpRight, href: "https://upwork.com/freelancers/muhammadismaeel", label: "Upwork" },
 ]
 
 export function Footer() {
   return (
-    <footer className="border-t border-white/5 px-6 py-8">
-      <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 sm:flex-row sm:justify-between">
-        <p className="text-sm text-muted-foreground">
-          {"2026 Alex Chen. Built with Next.js & Tailwind CSS."}
-        </p>
-        <div className="flex items-center gap-3">
-          {socials.map((social) => (
+    <footer className="border-t border-[#00E5FF]/5 px-6 py-8">
+      <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 sm:flex-row sm:justify-between">
+        <div className="flex flex-col items-center gap-1 sm:items-start">
+          <p className="text-sm font-medium text-foreground">
+            <span className="text-gradient">{"Muhammad Ismaeel"}</span>
+          </p>
+          <p className="text-xs text-muted-foreground">
+            {"Built with Next.js, Tailwind CSS & Framer Motion"}
+          </p>
+        </div>
+
+        <div className="flex items-center gap-4">
+          {links.map((link) => (
             <a
-              key={social.label}
-              href={social.href}
+              key={link.label}
+              href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={social.label}
-              className="text-muted-foreground transition-colors hover:text-primary"
+              aria-label={link.label}
+              className="flex items-center gap-1.5 text-xs text-muted-foreground transition-colors hover:text-primary"
             >
-              <social.icon className="h-4 w-4" />
+              <link.icon className="h-3.5 w-3.5" />
+              <span className="hidden sm:inline">{link.label}</span>
             </a>
           ))}
         </div>

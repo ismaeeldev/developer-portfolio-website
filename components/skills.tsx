@@ -4,111 +4,125 @@ import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
 import { SectionWrapper } from "./section-wrapper"
 
-const skills = [
+const categories = [
   {
-    name: "React",
-    level: 95,
-    icon: (
-      <svg viewBox="0 0 24 24" className="h-8 w-8" fill="currentColor">
-        <path d="M12 10.11c1.03 0 1.87.84 1.87 1.89 0 1-.84 1.85-1.87 1.85S10.13 13 10.13 12c0-1.05.84-1.89 1.87-1.89M7.37 20c.63.38 2.01-.2 3.6-1.7-.52-.59-1.03-1.23-1.51-1.9a22.7 22.7 0 01-2.4-.36c-.51 2.14-.32 3.61.31 3.96m.71-5.74l-.29-.51c-.11.29-.22.58-.29.86.27.06.57.11.88.16l-.3-.51m6.54-.76l.81-1.5-.81-1.5c-.3-.53-.62-1-.91-1.47C13.17 9 12.6 9 12 9c-.6 0-1.17 0-1.71.03-.29.47-.61.94-.91 1.47L8.57 12l.81 1.5c.3.53.62 1 .91 1.47.54.03 1.11.03 1.71.03.6 0 1.17 0 1.71-.03.29-.47.61-.94.91-1.47M12 6.78c-.19.22-.39.45-.59.72h1.18c-.2-.27-.4-.5-.59-.72m0 10.44c.19-.22.39-.45.59-.72h-1.18c.2.27.4.5.59.72M16.62 4c-.62-.38-2 .2-3.59 1.7.52.59 1.03 1.23 1.51 1.9.82.08 1.63.2 2.4.36.51-2.14.32-3.61-.32-3.96m-.7 5.74l.29.51c.11-.29.22-.58.29-.86-.27-.06-.57-.11-.88-.16l.3.51m1.45-7.05c1.47.84 1.63 3.05 1.01 5.63 2.54.75 4.37 1.99 4.37 3.68 0 1.69-1.83 2.93-4.37 3.68.62 2.58.46 4.79-1.01 5.63-1.46.84-3.45-.12-5.37-1.95-1.92 1.83-3.91 2.79-5.38 1.95-1.46-.84-1.62-3.05-1-5.63-2.54-.75-4.37-1.99-4.37-3.68 0-1.69 1.83-2.93 4.37-3.68-.62-2.58-.46-4.79 1-5.63 1.47-.84 3.46.12 5.38 1.95 1.92-1.83 3.91-2.79 5.37-1.95M17.08 12c.34.75.64 1.5.89 2.26 2.1-.63 3.28-1.53 3.28-2.26 0-.73-1.18-1.63-3.28-2.26-.25.76-.55 1.51-.89 2.26M6.92 12c-.34-.75-.64-1.5-.89-2.26-2.1.63-3.28 1.53-3.28 2.26 0 .73 1.18 1.63 3.28 2.26.25-.76.55-1.51.89-2.26m9 2.26l-.3.51c.31-.05.61-.1.88-.16-.07-.28-.18-.57-.29-.86l-.29.51m-2.89 4.04c1.59 1.5 2.97 2.08 3.59 1.7.64-.35.83-1.82.32-3.96-.77.16-1.58.28-2.4.36-.48.67-.99 1.31-1.51 1.9M8.08 9.74l.3-.51c-.31.05-.61.1-.88.16.07.28.18.57.29.86l.29-.51m2.89-4.04C9.38 4.2 8 3.62 7.37 4c-.63.35-.82 1.82-.31 3.96a22.7 22.7 0 012.4-.36c.48-.67.99-1.31 1.51-1.9z" />
-      </svg>
-    ),
+    title: "Frontend",
+    skills: [
+      { name: "React.js", level: "Expert" },
+      { name: "Next.js", level: "Expert" },
+      { name: "TypeScript", level: "Expert" },
+      { name: "Tailwind CSS", level: "Expert" },
+      { name: "HTML/CSS", level: "Expert" },
+    ],
   },
   {
-    name: "Next.js",
-    level: 92,
-    icon: (
-      <svg viewBox="0 0 24 24" className="h-8 w-8" fill="currentColor">
-        <path d="M11.572 0c-.176 0-.31.001-.358.007a19.76 19.76 0 01-.364.033C7.443.346 4.25 2.185 2.228 5.012a11.875 11.875 0 00-2.119 5.243c-.096.659-.108.854-.108 1.747s.012 1.089.108 1.748c.652 4.506 3.86 8.292 8.209 9.695.779.25 1.6.422 2.534.525.363.04 1.935.04 2.299 0 1.611-.178 2.977-.577 4.323-1.264.207-.106.247-.134.219-.158-.02-.013-.9-1.193-1.955-2.62l-1.919-2.592-2.404-3.558a338.739 338.739 0 00-2.422-3.556c-.009-.002-.018 1.579-.023 3.51-.007 3.38-.01 3.515-.052 3.595a.426.426 0 01-.206.214c-.075.037-.14.044-.495.044H7.81l-.108-.068a.438.438 0 01-.157-.171l-.05-.106.006-4.703.007-4.705.072-.092a.645.645 0 01.174-.143c.096-.047.134-.051.54-.051.478 0 .558.018.682.154.035.038 1.337 1.999 2.895 4.361a10760.433 10760.433 0 004.735 7.17l1.9 2.879.096-.063a12.317 12.317 0 002.466-2.163 11.944 11.944 0 002.824-6.134c.096-.66.108-.854.108-1.748 0-.893-.012-1.088-.108-1.747-.652-4.506-3.859-8.292-8.208-9.695a12.597 12.597 0 00-2.499-.523A33.119 33.119 0 0011.573 0zm4.069 7.217c.347 0 .408.005.486.047a.473.473 0 01.237.277c.018.06.023 1.365.018 4.304l-.006 4.218-.744-1.14-.746-1.14v-3.066c0-1.982.01-3.097.023-3.15a.478.478 0 01.233-.296c.096-.05.13-.054.5-.054z" />
-      </svg>
-    ),
+    title: "Backend",
+    skills: [
+      { name: "Node.js", level: "Expert" },
+      { name: "Nest.js", level: "Advanced" },
+      { name: "Express.js", level: "Expert" },
+      { name: "tRPC", level: "Advanced" },
+      { name: "GraphQL", level: "Advanced" },
+    ],
   },
   {
-    name: "Node.js",
-    level: 88,
-    icon: (
-      <svg viewBox="0 0 24 24" className="h-8 w-8" fill="currentColor">
-        <path d="M11.998 24c-.321 0-.641-.084-.922-.247l-2.936-1.737c-.438-.245-.224-.332-.08-.383.585-.203.703-.249 1.328-.604.065-.037.151-.023.218.017l2.256 1.339a.29.29 0 00.272 0l8.795-5.076a.277.277 0 00.134-.238V6.921a.28.28 0 00-.137-.242l-8.791-5.072a.278.278 0 00-.271 0L3.075 6.68a.284.284 0 00-.139.241v10.15a.27.27 0 00.138.236l2.409 1.392c1.307.654 2.108-.116 2.108-.89V7.787c0-.142.114-.253.256-.253h1.115c.139 0 .255.112.255.253v10.021c0 1.745-.95 2.745-2.604 2.745-.508 0-.909 0-2.026-.551l-2.307-1.329A1.85 1.85 0 011.35 17.07V6.921c0-.646.35-1.25.913-1.572l8.795-5.082a1.905 1.905 0 011.846 0l8.794 5.082c.564.322.913.926.913 1.572v10.15a1.85 1.85 0 01-.913 1.571l-8.795 5.076c-.28.163-.6.247-.921.247h.016zm2.722-6.985c-3.868 0-4.676-1.776-4.676-3.266 0-.143.113-.253.255-.253h1.137c.127 0 .233.092.252.216.172 1.159.683 1.744 3.012 1.744 1.853 0 2.641-.419 2.641-1.401 0-.566-.223-.986-3.104-1.269-2.409-.238-3.899-.77-3.899-2.697 0-1.777 1.498-2.835 4.01-2.835 2.822 0 4.217.979 4.393 3.08a.256.256 0 01-.253.278h-1.142a.248.248 0 01-.245-.205c-.272-1.207-.932-1.593-2.753-1.593-2.028 0-2.264.707-2.264 1.237 0 .643.279.83 3.008 1.193 2.704.358 3.994.866 3.994 2.763 0 1.918-1.597 3.013-4.384 3.013l.018-.005z" />
-      </svg>
-    ),
+    title: "AI / ML",
+    skills: [
+      { name: "LangChain", level: "Advanced" },
+      { name: "LangGraph", level: "Advanced" },
+      { name: "Hugging Face", level: "Advanced" },
+      { name: "OpenAI API", level: "Expert" },
+      { name: "RAG Systems", level: "Advanced" },
+    ],
   },
   {
-    name: "Tailwind CSS",
-    level: 94,
-    icon: (
-      <svg viewBox="0 0 24 24" className="h-8 w-8" fill="currentColor">
-        <path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.337 6.182 14.976 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.337 13.382 8.976 12 6.001 12z" />
-      </svg>
-    ),
-  },
-  {
-    name: "TypeScript",
-    level: 90,
-    icon: (
-      <svg viewBox="0 0 24 24" className="h-8 w-8" fill="currentColor">
-        <path d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0zm17.363 9.75c.612 0 1.154.037 1.627.111a6.38 6.38 0 011.306.34v2.458a3.95 3.95 0 00-.643-.361 5.093 5.093 0 00-.717-.26 5.453 5.453 0 00-1.426-.2c-.3 0-.573.028-.819.086a2.1 2.1 0 00-.623.242c-.17.104-.3.229-.393.374a.888.888 0 00-.14.49c0 .196.053.373.156.529.104.156.252.304.443.444s.42.276.69.394.57.232.91.336c.5.152.95.322 1.356.508.406.186.754.395 1.043.626.29.23.514.494.672.79.158.296.237.65.237 1.064 0 .45-.083.84-.25 1.17-.166.33-.4.604-.7.82a3.16 3.16 0 01-1.05.5 4.563 4.563 0 01-1.302.176c-.71 0-1.365-.101-1.967-.304a5.063 5.063 0 01-1.602-.834v-2.633a5.2 5.2 0 002.028 1.29c.404.135.813.2 1.228.2a2.77 2.77 0 00.64-.065 1.36 1.36 0 00.454-.179.713.713 0 00.327-.605.551.551 0 00-.166-.417 1.62 1.62 0 00-.47-.321 5.81 5.81 0 00-.737-.283 33.568 33.568 0 00-.947-.3c-.477-.153-.909-.33-1.298-.532a3.746 3.746 0 01-.993-.694 2.876 2.876 0 01-.636-.97c-.149-.37-.222-.793-.222-1.27 0-.418.083-.804.25-1.16.166-.356.403-.66.712-.914.309-.254.684-.453 1.124-.598.44-.145.937-.217 1.49-.217zM11.46 9.883h2.14v1.79H11.46v5.37c0 .28.016.52.047.72.031.2.094.362.189.49a.87.87 0 00.396.3c.171.069.399.103.684.103.144 0 .297-.012.46-.037a2.89 2.89 0 00.472-.11v1.756a5.048 5.048 0 01-1.636.27c-.602 0-1.077-.08-1.425-.24a2.048 2.048 0 01-.824-.652 2.314 2.314 0 01-.375-.94 6.44 6.44 0 01-.087-1.09v-5.94H7.95V9.883h1.284v-2.92l2.086-.714v3.634h.14z" />
-      </svg>
-    ),
-  },
-  {
-    name: "MongoDB",
-    level: 85,
-    icon: (
-      <svg viewBox="0 0 24 24" className="h-8 w-8" fill="currentColor">
-        <path d="M17.193 9.555c-1.264-5.58-4.252-7.414-4.573-8.115-.28-.394-.53-.954-.735-1.44-.036.495-.055.685-.523 1.184-.723.566-4.438 3.682-4.74 10.02-.282 5.912 4.27 9.435 4.888 9.884l.07.05A73.49 73.49 0 0111.91 24h.481c.114-1.032.284-2.056.51-3.07.417-.296.604-.463.85-.693a11.342 11.342 0 003.639-8.464c.01-.814-.103-1.662-.197-2.218zm-5.336 8.195s0-8.291.275-8.29c.213 0 .49 10.695.49 10.695-.381-.045-.765-1.76-.765-2.405z" />
-      </svg>
-    ),
+    title: "Database & Tools",
+    skills: [
+      { name: "MongoDB", level: "Expert" },
+      { name: "PostgreSQL", level: "Advanced" },
+      { name: "Redis", level: "Intermediate" },
+      { name: "Docker", level: "Advanced" },
+      { name: "Git/GitHub", level: "Expert" },
+    ],
   },
 ]
+
+function getLevelWidth(level: string) {
+  switch (level) {
+    case "Expert": return "100%"
+    case "Advanced": return "80%"
+    case "Intermediate": return "60%"
+    default: return "50%"
+  }
+}
+
+function getLevelColor(level: string) {
+  switch (level) {
+    case "Expert": return "#00E5FF"
+    case "Advanced": return "#00B4D8"
+    case "Intermediate": return "#0096C7"
+    default: return "#0077B6"
+  }
+}
 
 export function Skills() {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <SectionWrapper id="skills" title="Skills & Expertise" subtitle="What I Do">
-      <div ref={ref} className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {skills.map((skill, i) => (
+    <SectionWrapper id="skills" title="Skills & Expertise" subtitle="Tech Stack">
+      <div ref={ref} className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        {categories.map((cat, catIndex) => (
           <motion.div
-            key={skill.name}
-            className="glass glass-hover glow-border group rounded-2xl p-6 transition-all duration-300"
+            key={cat.title}
+            className="glass glass-hover glow-border rounded-2xl p-6"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: i * 0.1 }}
-            whileHover={{ y: -5 }}
+            transition={{ duration: 0.5, delay: catIndex * 0.15 }}
           >
-            <div className="mb-4 flex items-center gap-4">
-              <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary/20">
-                {skill.icon}
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-foreground">
-                  {skill.name}
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  {skill.level}% proficiency
-                </p>
-              </div>
-            </div>
-
-            {/* Animated progress bar */}
-            <div className="h-2 overflow-hidden rounded-full bg-muted">
-              <motion.div
-                className="h-full rounded-full"
-                style={{
-                  background:
-                    "linear-gradient(90deg, #3B82F6, #6366F1)",
-                }}
-                initial={{ width: "0%" }}
-                animate={
-                  isInView ? { width: `${skill.level}%` } : { width: "0%" }
-                }
-                transition={{
-                  duration: 1.2,
-                  delay: 0.3 + i * 0.1,
-                  ease: "easeOut",
-                }}
+            <h3 className="mb-5 flex items-center gap-2 text-sm font-semibold tracking-wide text-primary uppercase">
+              <span
+                className="h-1 w-4 rounded-full"
+                style={{ backgroundColor: "#00E5FF", boxShadow: "0 0 8px rgba(0,229,255,0.6)" }}
               />
+              {cat.title}
+            </h3>
+
+            <div className="flex flex-col gap-4">
+              {cat.skills.map((skill, i) => (
+                <motion.div
+                  key={skill.name}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ duration: 0.4, delay: catIndex * 0.15 + i * 0.05 }}
+                >
+                  <div className="mb-1.5 flex items-center justify-between">
+                    <span className="text-sm font-medium text-foreground">{skill.name}</span>
+                    <span
+                      className="rounded-full px-2 py-0.5 font-mono text-[10px] font-medium"
+                      style={{
+                        color: getLevelColor(skill.level),
+                        backgroundColor: `${getLevelColor(skill.level)}15`,
+                        border: `1px solid ${getLevelColor(skill.level)}25`,
+                      }}
+                    >
+                      {skill.level}
+                    </span>
+                  </div>
+                  <div className="h-1.5 overflow-hidden rounded-full bg-muted/50">
+                    <motion.div
+                      className="h-full rounded-full"
+                      style={{
+                        background: `linear-gradient(90deg, ${getLevelColor(skill.level)}, ${getLevelColor(skill.level)}80)`,
+                        boxShadow: `0 0 8px ${getLevelColor(skill.level)}40`,
+                      }}
+                      initial={{ width: "0%" }}
+                      animate={isInView ? { width: getLevelWidth(skill.level) } : { width: "0%" }}
+                      transition={{ duration: 1, delay: catIndex * 0.15 + i * 0.1 + 0.3, ease: "easeOut" }}
+                    />
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
         ))}
